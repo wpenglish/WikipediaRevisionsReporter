@@ -1,4 +1,4 @@
-package edu.bsu.cs;
+package edu.bsu.cs.model;
 
 import java.time.Instant;
 import java.util.Objects;

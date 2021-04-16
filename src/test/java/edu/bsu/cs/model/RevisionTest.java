@@ -1,4 +1,4 @@
-package edu.bsu.cs;
+package edu.bsu.cs.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

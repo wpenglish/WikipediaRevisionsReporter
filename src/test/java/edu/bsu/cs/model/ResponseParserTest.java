@@ -1,5 +1,7 @@
-package edu.bsu.cs;
+package edu.bsu.cs.model;
 
+import edu.bsu.cs.model.QueryResponse;
+import edu.bsu.cs.model.ResponseParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

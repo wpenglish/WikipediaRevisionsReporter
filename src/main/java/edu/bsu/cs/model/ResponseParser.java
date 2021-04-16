@@ -1,4 +1,4 @@
-package edu.bsu.cs;
+package edu.bsu.cs.model;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;

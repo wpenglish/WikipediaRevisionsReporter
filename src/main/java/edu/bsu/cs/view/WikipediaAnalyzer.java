@@ -4,14 +4,12 @@ import com.google.inject.Inject;
 import edu.bsu.cs.model.QueryEngine;
 import edu.bsu.cs.model.QueryResponse;
 import edu.bsu.cs.model.Revision;
-import edu.bsu.cs.model.WikipediaQueryEngine;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 
 public final class WikipediaAnalyzer extends VBox {
@@ -50,7 +48,7 @@ public final class WikipediaAnalyzer extends VBox {
             executor.execute(() -> {
                 try {
                     QueryResponse response = engine.queryRevisions(articleTitle);
-                    ResponseFormatter formatter = new ResponseFormatter();
+                    RevisionFormatter formatter = new RevisionFormatter();
                     StringBuilder stringBuilder = new StringBuilder();
                     for (Revision revision : response.revisions()) {
                         String message = formatter.format(revision);

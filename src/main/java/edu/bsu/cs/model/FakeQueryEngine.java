@@ -7,6 +7,8 @@ import java.time.Instant;
 
 public final class FakeQueryEngine implements QueryEngine {
 
+    // Suppress warning about the lack of assignment to this field.
+    @SuppressWarnings("unused")
     @Inject
     private Duration sleepDuration;
 

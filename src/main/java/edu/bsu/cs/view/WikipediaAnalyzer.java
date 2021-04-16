@@ -23,9 +23,15 @@ public final class WikipediaAnalyzer extends VBox {
     private final Button queryButton = new Button("Search");
     private final List<Control> inputControls = List.of(titleField, queryButton);
 
+    // Suppress the warning that this field is not initialized.
+    // Unfortunately, it is the same warning as if it were never used, which means
+    // this is "over-suppressing," but this is preferable to keeping the warning around.
+    @SuppressWarnings("unused")
     @Inject
     private QueryEngine engine;
 
+    // See note above
+    @SuppressWarnings("unused")
     @Inject
     private ExecutorService executor;
 

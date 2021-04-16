@@ -1,5 +1,6 @@
 package edu.bsu.cs.view;
 
+import com.google.inject.Inject;
 import edu.bsu.cs.model.QueryEngine;
 import edu.bsu.cs.model.QueryResponse;
 import edu.bsu.cs.model.Revision;
@@ -24,11 +25,13 @@ public final class WikipediaAnalyzer extends VBox {
     private final Button queryButton = new Button("Search");
     private final List<Control> inputControls = List.of(titleField, queryButton);
 
-    private final QueryEngine engine = new WikipediaQueryEngine();
-    private final ExecutorService executor;
+    @Inject
+    private QueryEngine engine;
 
-    public WikipediaAnalyzer(ExecutorService executor) {
-        this.executor = Objects.requireNonNull(executor);
+    @Inject
+    private ExecutorService executor;
+
+    public WikipediaAnalyzer() {
         queryButton.setOnAction(e -> runQuery());
         titleField.setOnAction(e -> runQuery());
 

@@ -1,7 +1,9 @@
 # Wikipedia Revisions Reporter
 
 This JavaFX application reports on the most recent changes to a Wikipedia
-page.
+page. When you provide the name of a Wikipedia article, the application
+will make a query to Wikipedia and return the thirty most recent
+changes to that page, printing the timestamp and editor's name.
  
 ## Running the application
 

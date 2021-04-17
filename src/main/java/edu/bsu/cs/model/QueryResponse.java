@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class QueryResponse {
+public final class QueryResponse {
 
     public static final class Builder {
         private final List<Revision> revisions = new ArrayList<>();

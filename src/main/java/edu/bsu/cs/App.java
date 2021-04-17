@@ -17,6 +17,8 @@ public final class App extends Application {
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     private final AbstractModule executorServiceModule = new AbstractModule() {
+        // Suppress this warning since the method is called reflectively, so the IDE does not recognize it.
+        @SuppressWarnings("unused")
         @Provides
         ExecutorService provideExecutorService() {
             return executorService;
@@ -38,6 +40,12 @@ public final class App extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
+
+        // If a JavaFX application starts up an executor service, then the application
+        // will not terminate when the window is closed.
+        // Overriding this method allows us to shut down the executor service (as
+        // done below) so that the application will terminate gracefully.
+
         executorService.shutdown();
         //noinspection ResultOfMethodCallIgnored
         executorService.awaitTermination(10, TimeUnit.SECONDS);

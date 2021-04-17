@@ -36,8 +36,8 @@ public final class WikipediaAnalyzer extends VBox {
     private ExecutorService executor;
 
     public WikipediaAnalyzer() {
-        queryButton.setOnAction(e -> runQuery());
-        titleField.setOnAction(e -> runQuery());
+        queryButton.setOnAction(e -> attemptQuery());
+        titleField.setOnAction(e -> attemptQuery());
 
         getChildren().addAll(
                 new HBox(new Label("Article Title: "),
@@ -46,32 +46,33 @@ public final class WikipediaAnalyzer extends VBox {
                 outputArea);
     }
 
-    private void runQuery() {
+    private void attemptQuery() {
         String articleTitle = titleField.getText().trim();
         if (!articleTitle.isEmpty()) {
             outputArea.clear();
             inputControls.forEach(control -> control.setDisable(true));
-            executor.execute(() -> {
-                try {
-                    QueryResponse response = engine.queryRevisions(articleTitle);
-                    RevisionFormatter formatter = new RevisionFormatter();
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for (Revision revision : response.revisions()) {
-                        String message = formatter.format(revision);
-                        stringBuilder.append(message);
-                        stringBuilder.append("\n");
-                    }
-                    outputArea.setText(stringBuilder.toString());
-                } catch (IOException e) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Connection Problem");
-                    alert.setContentText("There was a problem connecting to Wikipedia. Check your network connection or try again later.");
-                } finally {
-                    inputControls.forEach(control -> control.setDisable(false));
-                }
-            });
+            executor.execute(() -> runQuery(articleTitle));
         }
     }
 
+    private void runQuery(String articleTitle) {
+        try {
+            QueryResponse response = engine.queryRevisions(articleTitle);
+            RevisionFormatter formatter = new RevisionFormatter();
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Revision revision : response.revisions()) {
+                String message = formatter.format(revision);
+                stringBuilder.append(message);
+                stringBuilder.append("\n");
+            }
+            outputArea.setText(stringBuilder.toString());
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Connection Problem");
+            alert.setContentText("There was a problem connecting to Wikipedia. Check your network connection or try again later.");
+        } finally {
+            inputControls.forEach(control -> control.setDisable(false));
+        }
+    }
 
 }

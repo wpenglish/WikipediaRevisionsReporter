@@ -1,36 +1,25 @@
 # Project Report
 
-(Put your name here)
-
-## Markdown Tips
-
-If you are unfamiliar with MarkDown, check out 
-[the official documentation](https://guides.github.com/features/mastering-markdown/).
-
-Note that IntelliJ IDEA has a Markdown preview that you can access in 
-the upper-right of the editor. Also, since Markdown documents&mdash;like
-source code&mdash;should be human-readable, make sure you keep your lines
-short, as you can see I have done in my Markdown files.
-
-Please remove this subsection before submitting your report. 
+William English
 
 ## Challenge #1 Complete
 
-(Explain your solution to Challenge #1. If it is not complete, change
-the subsection title above to "Incomplete" and explain how far you got
-and where you got stuck.)
+Within the QueryEngineModule, the FakeQueryEngine was being passed and bound to the QueryEngine that is used within the application. 
+I imported the WikipediaQueryEngine instead and bound it to the QueryEngine removing the FakeQueryEngine from being used.
 
 ## Challenge #2 Complete
 
-(Explain your solution to Challenge #2. If it is not complete, change
-the subsection title above to "Incomplete" and explain how far you got
-and where you got stuck.)
+Many changes were made to get the new Formatter interface setup and the RevisionFormatter opposing execution flow. 
+First, I made a Formatter interface that includes format function. I then moved the RevisionFormatter to be in the model folder with the Formatter interface. I changed RevisionFormatter to implement Formatter.
+Then, I created a FormatterModule to bind the RevisionFormatter to the interface Formatter. In App file, I added the FormatterModule to the Guice Injector. 
+Within the WikipediaAnalyzer, I was now able to add the Formatter as an Injection. Then I took out the line that created a new object of RevisionsFormatter. The newly injected Formatter now formats in the revision. 
+Finally, I changed the RevisionFormatter to now output each revision as "User made a change at ISO_INSTANT_TIME".
+
 
 ## Challenge #3 Complete
 
-(Explain your solution to Challenge #3. If it is not complete, change
-the subsection title above to "Incomplete" and explain how far you got
-and where you got stuck.)
+There weren't many changes, but I removed the for loop printing the revisions. I then took the list and converted to stream. That stream was then mapped and within the map function I used the Formatter to format the revisions and add a line break.
+The map was then collected and joined using the Collectors class and its joining function. This made the map into one string. The string was then put into the outputArea like before.
 
 ## Reflection Question #1: Functional vs OO
 

@@ -1,6 +1,7 @@
 package edu.bsu.cs.view;
 
 import com.google.inject.Inject;
+import edu.bsu.cs.model.Formatter;
 import edu.bsu.cs.model.QueryEngine;
 import edu.bsu.cs.model.QueryResponse;
 import edu.bsu.cs.model.Revision;
@@ -33,6 +34,11 @@ public final class WikipediaAnalyzer extends VBox {
     // See note above
     @SuppressWarnings("unused")
     @Inject
+    private Formatter formatter;
+
+    // See note above
+    @SuppressWarnings("unused")
+    @Inject
     private ExecutorService executor;
 
     public WikipediaAnalyzer() {
@@ -58,7 +64,6 @@ public final class WikipediaAnalyzer extends VBox {
     private void runQuery(String articleTitle) {
         try {
             QueryResponse response = engine.queryRevisions(articleTitle);
-            RevisionFormatter formatter = new RevisionFormatter();
             StringBuilder stringBuilder = new StringBuilder();
             for (Revision revision : response.revisions()) {
                 String message = formatter.format(revision);
